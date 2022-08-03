@@ -7,12 +7,13 @@ import { AuthComponent } from './auth.component';
 import { VerifyotpComponent } from './verifyotp/verifyotp.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClient } from '@angular/common/http';
-import { AxiosService } from 'src/app/axios.service';
+import { AxiosClient } from 'src/app/axios.service';
 import { LoginService } from 'src/app/login.service';
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, VerifyotpComponent],
-  providers: [LoginService, AxiosService, { provide: 'baseURL', useValue: 'http://localhost:8001/api/auth' }, HttpClient],
+  // providers: [LoginService, AxiosClient, { provide: 'baseURL', useValue: 'http://localhost:8001/api/auth' }, HttpClient],
+  providers: [LoginService, AxiosClient, HttpClient],
 
   imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule],
 })

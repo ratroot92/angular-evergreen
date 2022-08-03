@@ -7,11 +7,27 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './login.service';
+import { AxiosClient } from './axios.service';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './store/reducers/auth.reducer';
+import { ReadComponent } from './shared/store/components/read/read.component';
+import { WriteComponent } from './shared/store/components/write/write.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [AuthGuard],
+  declarations: [AppComponent, HomeComponent, ReadComponent, WriteComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot(
+      {
+        auth: <any>authReducer,
+      },
+      {},
+    ),
+  ],
+  providers: [AuthGuard, LoginService, AxiosClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

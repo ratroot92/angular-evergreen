@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 
 type ServiceName = 'authService' | 'userService';
 interface IRequestHeaders {
@@ -16,32 +16,24 @@ interface IGetService {
 // })
 
 @Injectable()
-export class AxiosService {
-  axiosInstance: any;
+export class AxiosClient {
+  axiosInstance: Axios;
   defaultHeaders = { 'Content-Type': 'application/json', Accept: 'application/json' };
-  microservices = {
-    authService: 'http://0.0.0.0:8001/api/auth',
-    userService: 'http://0.0.0.0:8002/api/user',
-  };
-  constructor(@Inject('baseURL') private baseURL: string) {
-    console.log('========================');
-    console.log('this.baseURL ==>', this.baseURL);
-    console.log('========================');
 
+  // constructor(@Inject('baseURL') private baseURL: string) {
+  constructor() {
     this.axiosInstance = axios.create({
-      baseURL: this.baseURL,
+      timeout: 2000,
+      headers: this.defaultHeaders,
     });
+    this.initInterceptors();
   }
 
-  getService(options: IGetService) {
-    this.axiosInstance = axios.create({
-      baseURL: this.microservices[options.serviceName],
-      timeout: options.timeout || 1000,
-      headers: !options.headers ? this.defaultHeaders : { ...options.headers, ...this.defaultHeaders },
-    });
+  initInterceptors() {
     this.axiosInstance.interceptors.request.use(
       function (config: any) {
         const accessToken = localStorage.getItem('accessToken');
+
         if (accessToken) {
           config.headers['accessToken'] = accessToken;
         }
@@ -50,9 +42,8 @@ export class AxiosService {
       },
 
       function (error: any) {
-        console.log('Do something with request error', error);
         return Promise.reject(error);
-      }
+      },
     );
 
     this.axiosInstance.interceptors.response.use(
@@ -73,14 +64,11 @@ export class AxiosService {
             status: error.response.status,
           });
         } else {
-          console.log('Do something with response error', error);
           return Promise.reject(error);
         }
-      }
+      },
     );
 
     return this.axiosInstance;
   }
-
-  async makeRequest(options = {}) {}
 }

@@ -9,10 +9,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/auth/login">Login</a>
+            <a class="nav-link active" aria-current="page" [routerLink]="appRoutesEnum.constructRoute(appRoutesEnum.AuthRoutes.LoginPage)">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="appRoutesEnum.constructRoute(appRoutesEnum.AuthRoutes.VerifyOTPPage)">Dashboard</a>
+            <a class="nav-link" [routerLink]="appRoutesEnum.constructRoute(appRoutesEnum.AuthRoutes.VerifyOTPPage)">Otp</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/auth/verify">Otp</a>

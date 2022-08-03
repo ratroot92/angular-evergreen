@@ -2,9 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AxiosService } from 'src/app/axios.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/login.service';
 import { AppRoutes } from 'src/app/shared/enums';
+import * as AuthActions from 'src/app/store/actions/auth.actions';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +15,20 @@ import { AppRoutes } from 'src/app/shared/enums';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  // loginData = {
-  //   password: '',
-  //   payload: '',
-  // };
+  auth: Observable<any>;
 
   loginForm = new FormGroup({
     payload: new FormControl('alice@evergreen.com', Validators.required),
     password: new FormControl('pakistan', Validators.required),
   });
 
-  constructor(private _loginService: LoginService, private _route: Router, private _http: HttpClient) {}
+  constructor(private _loginService: LoginService, private _route: Router, private _store: Store<AppState>) {
+    this.auth = _store.select('auth');
+  }
 
   ngOnInit(): void {
     console.log('ngOnInit', this);
-    console.log('ngOnInit', this._route);
+    console.log(' this.auth', this.auth);
   }
 
   get payload() {
@@ -42,18 +44,11 @@ export class LoginComponent implements OnInit {
         const payload: string = this.loginForm.value.payload || '';
         const password: string = this.loginForm.value.password || '';
         const type = payload.includes('@') ? 1 : 2;
-        this._http.post(`http://0.0.0.0:8001/api/auth/login`, payload).subscribe(
-          (res) => {
-            console.log('res', res);
-          },
-          (error) => {
-            console.log(error);
-          },
-        );
-        // const reqPayload: any = { payload, password, type };
-        // const res = await this._loginService.login(reqPayload);
-        // localStorage.setItem('authPayload', JSON.stringify(reqPayload));
-        // this._route.navigate(['/admin/auth/verify']);
+        const reqPayload: any = { payload, password, type };
+        const res = await this._loginService.login(reqPayload);
+        localStorage.setItem('authPayload', JSON.stringify(reqPayload));
+        this._store.dispatch(new AuthActions.SetLoginPayload({ payload, type }));
+        this._route.navigate([AppRoutes.constructRoute(AppRoutes.AuthRoutes.VerifyOTPPage)]);
       }
     } catch (err: any) {
       console.log(err.message);

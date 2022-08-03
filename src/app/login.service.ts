@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import axios from 'axios';
-import { AxiosService } from './axios.service';
+import { AxiosClient } from './axios.service';
+import { AUTH_MICROSERVICE } from './shared/constants';
 
 // @Injectable({
 //   providedIn: 'root',
@@ -10,17 +11,12 @@ import { AxiosService } from './axios.service';
 export class LoginService {
   authService = 'http://localhost:8001/api/auth';
 
-  // constructor(@Inject('paramId') private paramId: string, private _axios: AxiosService) {}
-  constructor(private _axios: AxiosService) {}
+  // constructor(@Inject('paramId') private paramId: string, private _axiosClient: AxiosClient) {}
+  constructor(private _axiosClient: AxiosClient) {}
 
   async login(payload: any) {
     try {
-      console.log('========================');
-      // console.log('paramId ==>', this.paramId);
-      console.log('========================');
-
-      // const api = this._axios({ serviceName: 'authService' });
-      const { data, status }: any = await this._axios.axiosInstance.post(`/login`, payload);
+      const { data, status }: any = await this._axiosClient.axiosInstance.post(`${AUTH_MICROSERVICE}/login`, payload);
       if (status === 200) {
         return data;
       }
@@ -32,7 +28,7 @@ export class LoginService {
 
   async verifyOtp(payload: any) {
     try {
-      const { data, status }: any = await this._axios.axiosInstance.post(`/otp`, payload);
+      const { data, status }: any = await this._axiosClient.axiosInstance.post(`${AUTH_MICROSERVICE}/otp`, payload);
       if (status === 200) {
         return data;
       }
@@ -44,7 +40,7 @@ export class LoginService {
 
   async isAuthenticated() {
     try {
-      const { data, status }: any = await this._axios.axiosInstance.get(`/isAuthenticated`);
+      const { data, status }: any = await this._axiosClient.axiosInstance.get(`${AUTH_MICROSERVICE}/isAuthenticated`);
       if (status === 200) {
         return data.data.isAuthenticated;
       }
