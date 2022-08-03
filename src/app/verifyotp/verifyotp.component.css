@@ -1,0 +1,66 @@
+.c-form-control {
+    width:25rem;;
+    height:40px;
+    border-radius: 0.2rem;
+    padding:0.3rem;
+    margin-top:0.2rem;
+    margin-bottom:0.2rem;
+
+}
+.c-label{
+    border-radius: 0.2rem;
+    height:40px;
+    display: flex;
+    width:10rem;
+    justify-content: start;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    align-items: center;
+    font-size: 14px;;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top:0.2rem;
+    margin-bottom:0.2rem;
+
+
+
+}
+.c-form-control-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.c-button{
+    height:2rem;
+    width: 10rem;
+    font-size: 14px;;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+}
+
+input.ng-invalid{
+    border-left:0.5rem solid red;
+    border-right:0.1rem solid red;
+    border-top:0.1rem solid red;
+    border-bottom: 0.1rem solid red;
+
+}
+
+input.ng-valid{
+    border-left:0.5rem solid green;
+    border-right:0.1rem solid green;
+    border-top:0.1rem solid green;
+    border-bottom: 0.1rem solid green;
+}
+
+.c-form-error{
+    font-size: 12px;
+    color:red;
+    margin-left: 0.5rem;;
+}
