@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../login.service';
+import { LoginService } from 'src/app/login.service';
+import { AppRoutes } from 'src/app/shared/enums';
 
 @Component({
   selector: 'app-verifyotp',
@@ -31,7 +32,11 @@ export class VerifyotpComponent implements OnInit {
           payload: 'alice@evergreen.com',
         };
         await this._loginService.verifyOtp(reqPayload);
-        this._route.navigate(['dashboard']);
+        console.log('======================================');
+        console.log('route ', AppRoutes.constructRoute(AppRoutes.AuthRoutes.VerifyOTPPage));
+        console.log('======================================');
+
+        this._route.navigate([AppRoutes.constructRoute(AppRoutes.AuthRoutes.VerifyOTPPage)]);
       }
     } catch (err: any) {
       console.log('err.message ==>', err.message);

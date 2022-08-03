@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
-import { VerifyotpComponent } from '../verifyotp/verifyotp.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from '../login/login.component';
-import { LoginService } from '../login.service';
-import { AxiosService } from '../axios.service';
+import { VerifyotpComponent } from './verifyotp/verifyotp.component';
+import { LoginComponent } from './login/login.component';
 import { HttpClient } from '@angular/common/http';
+import { AxiosService } from 'src/app/axios.service';
+import { LoginService } from 'src/app/login.service';
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, VerifyotpComponent],

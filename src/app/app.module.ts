@@ -6,12 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from './shared/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, DashboardComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  declarations: [AppComponent, HomeComponent],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
