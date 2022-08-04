@@ -8,7 +8,14 @@ import { AppRoutes } from '../shared/enums';
 })
 export class HomeComponent implements OnInit {
   public readonly appRoutesEnum = AppRoutes;
+  options: any = {
+    isAuthenticated: false,
+  };
   constructor() {}
 
   ngOnInit(): void {}
+
+  changeOptions() {
+    this.options.isAuthenticated = !this.options.isAuthenticated;
+  }
 }
