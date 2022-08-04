@@ -1,0 +1,23 @@
+ul{
+
+    border:1px solid green;
+    background-color: green;;
+    list-style: none;
+    width: 100%;;
+    padding:0px;
+    margin:0px;
+    height: 100%;;
+}
+
+ul li {
+    color:white;
+    font-weight: bold;
+    border:1px solid white;
+    padding-top:1rem;
+    padding-bottom:1rem;
+    padding-left:0.5rem;
+    padding-bottom:1rem;
+    font-size: 14px;;
+
+
+}

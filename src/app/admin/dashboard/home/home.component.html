@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 border border-dark">
+            <ul>
+                <li>
+            <a class="nav-link" [routerLink]="appRoutesEnum.constructRoute(appRoutesEnum.DashboardRoutes.HomePage)">Dashboard</a>
+                    
+                </li>
+                <li>
+            <a class="nav-link" [routerLink]="appRoutesEnum.constructRoute(appRoutesEnum.DashboardRoutes.UsersPage)">Users</a>
+                </li>
+                <li>
+            <a class="nav-link" [routerLink]="appRoutesEnum.constructRoute(appRoutesEnum.DashboardRoutes.UsersPage)">Roles</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

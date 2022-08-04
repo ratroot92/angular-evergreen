@@ -9,4 +9,6 @@ import { HomeComponent } from './home/home.component';
   declarations: [DashboardComponent, HomeComponent],
   imports: [CommonModule, DashboardRoutingModule],
 })
-export class DashboardModule {}
+export class DashboardModule {
+  constructor() {}
+}
