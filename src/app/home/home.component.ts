@@ -10,6 +10,11 @@ export class HomeComponent implements OnInit {
   public readonly appRoutesEnum = AppRoutes;
   options: any = {
     isAuthenticated: false,
+    theme: 'dark',
+    title: 'Evergreen',
+    user: {
+      username: 'maliksblr92',
+    },
   };
   constructor() {}
 

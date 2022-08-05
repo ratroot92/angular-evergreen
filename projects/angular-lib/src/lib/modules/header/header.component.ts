@@ -9,6 +9,10 @@ import { CommonModule } from '@angular/common';
 })
 export class SharedHeaderComponent implements OnInit {
   @Input() options: any;
-  constructor() {}
+  constructor() {
+    console.log('=============================');
+    console.log('this.options', this.options);
+    console.log('=============================');
+  }
   ngOnInit(): void {}
 }
